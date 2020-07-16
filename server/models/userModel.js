@@ -18,7 +18,7 @@ const UserSchema = new Schema(
     { timestamps: true }
 );
 
-/*
+/**
  * A method to set the User's password
  * @param {string} password - The plain text password to hash
  */
@@ -29,7 +29,7 @@ UserSchema.methods.setPassword = function (plainTextPassword) {
     this.hash = hashedPassword;
 };
 
-/*
+/**
  * A method to validate password
  * @param {string} password - The plain text password to compare
  */
@@ -37,14 +37,14 @@ UserSchema.methods.validatePassword = function (plainTextPassword) {
     return bcrypt.compareSync(plainTextPassword, this.hash);
 };
 
-/*
+/**
  * @returns The user's full name
  */
 UserSchema.virtual("fullName").get(function () {
     return `${this.firstname} ${this.lastname}`;
 });
 
-/*
+/**
  * Returns data in json format. Excludes the user's hash.
  */
 UserSchema.methods.toJSON = function () {

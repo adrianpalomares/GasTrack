@@ -14,7 +14,7 @@ const MaintenanceSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-/* 
+/** 
 * Converts cost into appropriate formats. A getter method for cost.
 * @param {number} number - The price to get
 * @return {string} It will return the price in the correct format
@@ -24,7 +24,7 @@ MaintenanceSchema.path("cost").get(function (number) {
     return (number / 100).toFixed(2);
 });
 
-/* 
+/** 
 * Converts cost into appropriate formats. A setter method for cost.
 * @return It will return the price in the correct format,
 eg. 1099
