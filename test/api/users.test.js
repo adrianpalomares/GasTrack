@@ -64,6 +64,7 @@ describe("POST /api/users", function () {
                 done();
             });
     });
+    //TODO: Finish this test
     it("Should have unique username.", async function () {
         return new Promise(async function (resolve, reject) {
             // Creating user
@@ -115,29 +116,30 @@ describe("GET /api/users", function () {
             .send({
                 firstname: "John",
                 lastname: "Doe",
-                username: "johndoe",
+                username: "johndoe2213",
                 password: "password123",
-                email: "example@example.com",
+                email: "example2323@example.com",
             })
             .end(function (err, response) {
                 response.body.should.have.property("_id");
                 // Setting user id for use in test
                 userId = response.body._id;
-            });
-        chai.request(server)
-            .get(`/api/users/${userId}`)
-            .end(function (err, response) {
-                response.should.have.status(200);
-                response.body.should.have.property("_id");
-                response.body.should.have.property("firstname", "John");
-                response.body.should.have.property("lastname", "Doe");
-                response.body.should.have.property(
-                    "email",
-                    "example@example.com"
-                );
-                response.body.should.have.property("createdAt");
-                response.body.should.have.property("updatedAt");
-                done();
+                // Second request to verify
+                chai.request(server)
+                    .get(`/api/users/${userId}`)
+                    .end(function (err, response) {
+                        response.should.have.status(200);
+                        response.body.should.have.property("_id");
+                        response.body.should.have.property("firstname", "John");
+                        response.body.should.have.property("lastname", "Doe");
+                        response.body.should.have.property(
+                            "email",
+                            "example2323@example.com"
+                        );
+                        response.body.should.have.property("createdAt");
+                        response.body.should.have.property("updatedAt");
+                        done();
+                    });
             });
     });
 });

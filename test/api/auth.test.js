@@ -57,14 +57,11 @@ describe("POST /api/auth/refresh", function () {
                 const refreshToken = res.headers["set-cookie"]
                     .pop()
                     .split(";")[0]; // refreshToken={REFRESHTOKEN}
-                console.log(refreshToken.split("=")[1]);
 
                 const refreshResponse = await chai
                     .request(server)
                     .post("/api/auth/refresh")
                     .send({ refreshToken: refreshToken.split("=")[1] });
-                // console.log(refreshResponse);
-                console.log(refreshResponse.body)
                 refreshResponse.body.should.have.property("accessToken");
                 resolve();
             } catch (err) {
