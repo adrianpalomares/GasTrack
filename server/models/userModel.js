@@ -9,8 +9,8 @@ const UserSchema = new Schema(
     {
         firstname: String,
         lastname: String,
-        email: String,
-        username: String,
+        email: { type: String, required: true },
+        username: { type: String, required: true },
         hash: String,
         profileImage: String,
     },

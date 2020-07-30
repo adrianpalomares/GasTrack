@@ -92,4 +92,30 @@ describe("User Model", function () {
             done();
         });
     });
+
+    it("Should require an email.", function (done) {
+        User.create({
+            firstname: "Jane",
+            lastname: "Doe",
+            username: "test",
+        }).catch(function (err) {
+            err.should.have.property('_message');
+            err.should.have.property('errors');
+            err.should.not.be.empty;
+            done();
+        });
+    });
+
+    it("Should require a username.", function (done) {
+        User.create({
+            firstname: "Jane",
+            lastname: "Doe",
+            email: "test@test.com",
+        }).catch(function (err) {
+            err.should.have.property('_message');
+            err.should.have.property('errors');
+            err.should.not.be.empty;
+            done();
+        })
+    });
 });

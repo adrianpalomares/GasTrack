@@ -22,6 +22,7 @@ describe("POST /api/users", function () {
             .send({
                 firstname: "John",
                 lastname: "Doe",
+                username: "johndoe",
                 password: "password123",
                 email: "example@example.com",
             })
@@ -63,6 +64,36 @@ describe("POST /api/users", function () {
                 done();
             });
     });
+    it("Should have unique username.", async function () {
+        return new Promise(async function (resolve, reject) {
+            // Creating user
+            chai.request(server)
+                .post("/api/users")
+                .send({
+                    firstname: "John",
+                    lastname: "Doe",
+                    username: "johndoe",
+                    password: "password",
+                    email: "example@example.com",
+                })
+                .end(function (err, response) {
+                    // console.log("unique user/email res", response.body);
+                    // Making second user
+                    chai.request(server)
+                        .post("/api/users")
+                        .send({
+                            firstname: "TESTING",
+                            lastname: "test",
+                            username: "johndoe",
+                            password: "password",
+                            email: "test@test.com",
+                        })
+                        .end(function (err, response) {
+                            resolve();
+                        });
+                });
+        });
+    });
 });
 
 describe("GET /api/users", function () {
@@ -84,6 +115,7 @@ describe("GET /api/users", function () {
             .send({
                 firstname: "John",
                 lastname: "Doe",
+                username: "johndoe",
                 password: "password123",
                 email: "example@example.com",
             })
@@ -120,6 +152,7 @@ describe("PUT /api/users/:id", function () {
             .send({
                 firstname: "John",
                 lastname: "Doe",
+                username: "johndoe",
                 password: "password123",
                 email: "example@example.com",
             })
@@ -162,6 +195,7 @@ describe("DELETE /api/users/:id", function () {
             .send({
                 firstname: "John",
                 lastname: "Doe",
+                username: "johndoe",
                 password: "password123",
                 email: "example@example.com",
             })

@@ -27,6 +27,7 @@ async function createUser() {
         firstname: "John",
         lastname: "Doe",
         email: "example@example.com",
+        username: "test",
         password: "password",
     });
     return user;

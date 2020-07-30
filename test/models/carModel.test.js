@@ -14,6 +14,7 @@ async function createUser() {
     const user = await User.create({
         firstname: "John",
         lastname: "Doe",
+        username: "test",
         email: "example@example.com",
         password: "password",
     });
