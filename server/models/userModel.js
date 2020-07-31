@@ -2,15 +2,15 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const bcrypt = require("bcrypt");
-
+const uniqueValidator = require("mongoose-unique-validator");
 // TODO: Make password hashing asynchronous
 
 const UserSchema = new Schema(
     {
         firstname: String,
         lastname: String,
-        email: { type: String, required: true },
-        username: { type: String, required: true },
+        email: { type: String, required: true, unique: true },
+        username: { type: String, required: true, unique: true },
         hash: String,
         profileImage: String,
     },
@@ -52,6 +52,11 @@ UserSchema.methods.toJSON = function () {
     delete obj.hash;
     return obj;
 };
+
+/**
+ * Adding validator
+ * */
+UserSchema.plugin(uniqueValidator);
 
 // Exporting the model for use elsewhere
 module.exports = mongoose.model("User", UserSchema);
