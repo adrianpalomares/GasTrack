@@ -64,36 +64,71 @@ describe("POST /api/users", function () {
                 done();
             });
     });
-    //TODO: Finish this test
-    it("Should have unique username.", async function () {
-        return new Promise(async function (resolve, reject) {
-            // Creating user
-            chai.request(server)
-                .post("/api/users")
-                .send({
-                    firstname: "John",
-                    lastname: "Doe",
-                    username: "johndoe",
-                    password: "password",
-                    email: "example@example.com",
-                })
-                .end(function (err, response) {
-                    // console.log("unique user/email res", response.body);
-                    // Making second user
-                    chai.request(server)
-                        .post("/api/users")
-                        .send({
-                            firstname: "TESTING",
-                            lastname: "test",
-                            username: "johndoe",
-                            password: "password",
-                            email: "test@test.com",
-                        })
-                        .end(function (err, response) {
-                            resolve();
-                        });
-                });
-        });
+
+    it("Should have unique username.", function (done) {
+        // Creating user
+        chai.request(server)
+            .post("/api/users")
+            .send({
+                firstname: "John",
+                lastname: "Doe",
+                username: "johndoe",
+                password: "password",
+                email: "example@example.com",
+            })
+            .end(function (err, response) {
+                // Making second user
+                chai.request(server)
+                    .post("/api/users")
+                    .send({
+                        firstname: "TESTING",
+                        lastname: "test",
+                        username: "johndoe",
+                        password: "password",
+                        email: "test@test.com",
+                    })
+                    .end(function (err, response) {
+                        response.should.status(400);
+                        response.body.should.have.property(
+                            "message",
+                            "Username already exists."
+                        );
+                        done();
+                    });
+            });
+    });
+
+    it("Should have a unique email.", function (done) {
+        // Creating user
+        chai.request(server)
+            .post("/api/users")
+            .send({
+                firstname: "John",
+                lastname: "Doe",
+                username: "johndoe324",
+                password: "password",
+                email: "example555@example.com",
+            })
+            .end(function (err, response) {
+                // Making second user
+                chai.request(server)
+                    .post("/api/users")
+                    .send({
+                        firstname: "TESTING",
+                        lastname: "test",
+                        username: "johndoe12413",
+                        password: "password",
+                        email: "example555@example.com",
+                    })
+                    .end(function (err, response) {
+                        response.should.status(400);
+                        response.body.should.have.property(
+                            "message",
+                            "Email already exists."
+                        );
+                        done();
+                    });
+            });
     });
 });
 
