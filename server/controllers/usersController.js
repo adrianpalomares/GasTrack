@@ -24,7 +24,7 @@ exports.userDetail = function (request, response) {
         });
 };
 
-exports.userCreate = function (request, response) {
+exports.userCreate = async function (request, response) {
     try {
         const newUser = new User({
             firstname: request.body.firstname,
@@ -34,11 +34,18 @@ exports.userCreate = function (request, response) {
             profileImage: request.body.profileImage,
         });
         newUser.setPassword(request.body.password);
-        newUser.save();
+        let savedUser = await newUser.save();
+        // console.log("err", savedUser);
         // Send the newUser in json format
-        response.status(201).json(newUser);
+        response.status(201).json(savedUser);
     } catch (err) {
-        response.json({ message: "Error creating user" });
+        if (err.errors.username) {
+            response.status(400).json({ message: "Username already exists." });
+        } else if (err.errors.email) {
+            response.status(400).json({ message: "Email already exists." });
+        } else {
+            response.status(400).json({ message: "Error creating user" });
+        }
     }
 };
 
