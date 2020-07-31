@@ -99,8 +99,8 @@ describe("User Model", function () {
             lastname: "Doe",
             username: "test",
         }).catch(function (err) {
-            err.should.have.property('_message');
-            err.should.have.property('errors');
+            err.should.have.property("_message");
+            err.should.have.property("errors");
             err.should.not.be.empty;
             done();
         });
@@ -112,10 +112,71 @@ describe("User Model", function () {
             lastname: "Doe",
             email: "test@test.com",
         }).catch(function (err) {
-            err.should.have.property('_message');
-            err.should.have.property('errors');
+            err.should.have.property("_message");
+            err.should.have.property("errors");
             err.should.not.be.empty;
             done();
-        })
+        });
+    });
+
+    it("Should have unique email.", function (done) {
+        User.create(
+            {
+                fistname: "John",
+                lastname: "Doe",
+                username: "johndoe",
+                password: "password",
+                email: "test@test.com",
+            },
+            function (err, user) {
+                // Creating second user to compare
+                User.create(
+                    {
+                        firstname: "Jane",
+                        lastname: "Doe",
+                        email: "test@test.com",
+                        password: "password",
+                        username: "janedoe",
+                    },
+                    function (err, user) {
+                        // Will throw error because of duplicate email
+                        err.should.not.be.empty;
+                        (user === undefined).should.be.true;
+                        err.errors.should.have.property("email");
+                        done();
+                    }
+                );
+            }
+        );
+    });
+
+    it("Should have unique username.", function (done) {
+        User.create(
+            {
+                firstname: "John",
+                lastname: "Doe",
+                username: "johndoe57",
+                password: "password",
+                email: "tester@tester.com",
+            },
+            function (err, user) {
+                // Creating second user
+                User.create(
+                    {
+                        firstname: "Jane",
+                        lastname: "Doe",
+                        username: "johndoe57",
+                        password: "password",
+                        email: "thetest@test.com",
+                    },
+                    function (err, user) {
+                        err.should.not.be.empty;
+                        (user === undefined).should.be.true;
+                        err.errors.should.have.property("username");
+                        done();
+                    }
+                );
+            }
+        );
     });
 });
