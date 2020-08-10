@@ -177,6 +177,20 @@ describe("GET /api/users", function () {
                     });
             });
     });
+
+    it("Should return 404 when user not found.", function (done) {
+        chai.request(server)
+            .get(`/api/users/000000000000000000000000`)
+            .end(function (err, response) {
+                response.status.should.equal(404);
+                response.body.should.be.an("object");
+                response.body.should.have.property(
+                    "message",
+                    "User not found."
+                );
+                done();
+            });
+    });
 });
 
 describe("PUT /api/users/:id", function () {
@@ -219,6 +233,19 @@ describe("PUT /api/users/:id", function () {
                         );
                         done();
                     });
+            });
+    });
+
+    it("Should return 404 when user is not found", function (done) {
+        chai.request(server)
+            .put("/api/users/000000000000000000000000")
+            .send({
+                firstname: "Jack",
+            })
+            .end(function (err, res) {
+                res.status.should.equal(404);
+                res.body.should.have.property("message", "User not found.");
+                done();
             });
     });
 });
