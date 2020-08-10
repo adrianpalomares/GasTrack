@@ -15,7 +15,9 @@ exports.userDetail = function (request, response) {
     User.findOne({ _id: request.params.id })
         .then(function (user) {
             // console.log(user);
-            response.json(user);
+            user === null
+                ? response.status(404).json({ message: "User not found." })
+                : response.json(user);
         })
         .catch(function (err) {
             console.log(err);
