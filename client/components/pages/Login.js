@@ -9,12 +9,21 @@ const Login = () => {
         event.preventDefault();
         axios({
             method: "POST",
-            url: "auth/token",
+            url: "http://localhost:8080/api/auth/token",
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+            },
             data: {
                 username: username,
                 password: password,
             },
-        }).then((res) => console.log(res));
+        })
+            .then((res) => {
+                console.log(res);
+                setPassword("");
+            })
+            .catch((err) => console.log(err));
     };
 
     return (
