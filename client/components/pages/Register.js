@@ -1,37 +1,58 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+// TODO: Make the cookies stay
+
 const Register = () => {
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [email, setEmail] = useState("");
+    const [confirmEmail, setConfirmEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+
+    // For error messages
+    const [flashMessage, setFlashMessage] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios({
-            method: "POST",
-            url: "http://localhost:8080/api/users",
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Content-Type": "application/json",
-            },
-            data: {
-                firstname: firstname,
-                lastname: lastname,
-                email: email,
-                username: username,
-                password: password,
-            },
-        })
-            .then((res) => console.log(res))
-            .catch((err) => console.log(err));
+
+        if (password !== confirmPassword) {
+            setFlashMessage("");
+            setFlashMessage("Passwords do not match!");
+            setConfirmPassword("");
+        } else if (email != confirmEmail) {
+            setFlashMessage("");
+            setFlashMessage("Emails do not match!");
+        } else {
+            axios({
+                method: "POST",
+                url: "http://localhost:8080/api/users",
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-Type": "application/json",
+                },
+                data: {
+                    firstname: firstname,
+                    lastname: lastname,
+                    email: email,
+                    username: username,
+                    password: password,
+                },
+            })
+                .then((res) => console.log(res))
+                .catch((err) => console.log(err));
+        }
     };
     return (
         <div>
             <h1>Register</h1>
             <form onSubmit={handleSubmit}>
+                {flashMessage ? (
+                    <p style={{ color: "red" }}>{flashMessage}</p>
+                ) : null}
+
                 <label htmlFor="email">Email: </label>
                 <input
                     id="email"
@@ -40,6 +61,16 @@ const Register = () => {
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <br></br>
+
+                <label htmlFor="confirmEmail">Confirm Email: </label>
+                <input
+                    id="confirmEmail"
+                    type="text"
+                    value={confirmEmail}
+                    onChange={(e) => setConfirmEmail(e.target.value)}
+                />
+                <br></br>
+
                 <label htmlFor="firstname">Firstname: </label>
                 <input
                     id="firstname"
@@ -76,6 +107,17 @@ const Register = () => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <br></br>
+
+                {/* Confirm Password */}
+                <label htmlFor="confirmPassword">Confirm Password: </label>
+                <input
+                    id="confirmPassword"
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+                <br></br>
+
                 <input type="submit" />
             </form>
         </div>
