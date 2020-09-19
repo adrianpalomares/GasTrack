@@ -32,7 +32,7 @@ const Register = () => {
         <div>
             <h1>Register</h1>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">Email: </label>
                 <input
                     id="email"
                     type="text"
@@ -40,7 +40,7 @@ const Register = () => {
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <br></br>
-                <label htmlFor="firstname">Firstname</label>
+                <label htmlFor="firstname">Firstname: </label>
                 <input
                     id="firstname"
                     type="text"
@@ -49,7 +49,7 @@ const Register = () => {
                 />
                 <br></br>
 
-                <label htmlFor="lastname">Lastname</label>
+                <label htmlFor="lastname">Lastname: </label>
                 <input
                     id="lastname"
                     type="text"
@@ -58,7 +58,7 @@ const Register = () => {
                 />
                 <br></br>
 
-                <label htmlFor="username">Username</label>
+                <label htmlFor="username">Username: </label>
                 <input
                     id="username"
                     type="text"
@@ -68,7 +68,7 @@ const Register = () => {
                 <br></br>
 
                 {/* Password */}
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">Password: </label>
                 <input
                     id="password"
                     type="password"
@@ -81,3 +81,5 @@ const Register = () => {
         </div>
     );
 };
+
+export default Register;
