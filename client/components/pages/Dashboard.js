@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 const Dashboard = () => {
+    const [gasRecords, setGasRecords] = useState([]);
+    const [maintenanceRecords, setMaintenanceRecords] = useState([]);
+
     return (
         <div class="container">
             <div class="card text-center">
