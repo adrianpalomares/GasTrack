@@ -1,5 +1,9 @@
 const User = require("../models/userModel");
 
+/* 
+TODO: Make this function return 10 random users
+Also, has to have param that has offset
+*/
 exports.userList = function (request, response) {
     User.findOne({}, function (err, docs) {
         if (err) {
