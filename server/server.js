@@ -21,10 +21,12 @@ app.use(cors());
 const userRoutes = require("./routes/api/users");
 const carsRoutes = require("./routes/api/cars");
 const authRoutes = require("./routes/api/auth");
+const fuelRecordRoutes = require("./routes/api/fuelRecords");
 
 app.use("/api/users", userRoutes);
 app.use("/api/cars", carsRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/fuelrecords", fuelRecordRoutes);
 
 const PORT = process.env.PORT || 8080;
 
