@@ -1,10 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-const userController = require('../../controllers/usersController');
-
-// Importing models
-const User = require("../../models/userModel");
+const userController = require("../../controllers/usersController");
 
 router.get("/", userController.userList);
 
