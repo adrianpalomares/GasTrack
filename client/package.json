@@ -14,6 +14,5 @@
         "hookrouter": "^1.2.3",
         "react": "^16.13.1",
         "react-dom": "^16.13.1"
-    },
-    "proxy": "http://localhost:8080"
+    }
 }
