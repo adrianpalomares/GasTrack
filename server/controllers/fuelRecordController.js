@@ -5,7 +5,8 @@ const { search } = require("../routes/api/fuelRecords");
 // TODO: Add the ability to limit and offset the results
 exports.fuelRecordList = async function (request, response) {
     try {
-        const DEFAULT_LIMIT = 10;
+        const LIMIT = request.query.limit ? parseInt(request.query.limit) : 10;
+        const OFFSET = request.query.limit ? parseInt(request.query.offset) : 0;
 
         // The search object that will be passed into the query
         const searchQuery = {};
@@ -14,7 +15,10 @@ exports.fuelRecordList = async function (request, response) {
         // to the request
         request.query.car ? (searchQuery.car = request.query.car) : "";
 
-        const results = await FuelRecord.find(searchQuery);
+        const results = await FuelRecord.find(searchQuery, null, {
+            skip: OFFSET,
+        }).limit(LIMIT);
+
         response.status(200).json(results);
     } catch (err) {
         console.log(err);
