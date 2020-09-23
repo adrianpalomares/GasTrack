@@ -6,6 +6,8 @@
 
 // TODO: Better error handling getRefreshedToken no jwt doesn't send back full err
 
+// TODO: A method to authenticate and only allow if it is the specific user
+// eg. A user wants to delete someone, can only delete themselves
 const jwt = require("jsonwebtoken");
 
 const User = require("../../server/models/userModel");
