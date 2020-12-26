@@ -12,7 +12,7 @@ const Dashboard = () => {
         fetch("http://localhost:8080/api/fuelrecords")
             .then((res) => res.json())
             .then((res) => {
-                setGasRecords([res]);
+                setGasRecords(res);
                 setIsLoading(false);
                 console.log(gasRecords);
             })
