@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import AuthContext from "../../context/auth";
 
 const Dashboard = () => {
     // Fuel records and maintenance records
