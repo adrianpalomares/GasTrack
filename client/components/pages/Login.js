@@ -1,16 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../App";
+import { Redirect } from "react-router-dom";
 
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
+    const [loginResult, setLoginResult] = useState(false);
+
     const { accessToken, setAccessToken } = useContext(AuthContext);
     useEffect(() => {
         console.log(accessToken);
         setAccessToken("From login");
-    });
+    }, []);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -27,13 +30,21 @@ const Login = () => {
             },
         })
             .then((res) => {
-                console.log(res);
-                setPassword("");
+                if (res.status == 200) {
+                    // Set access token to local storage
+                    setAccessToken(res.data.accessToken)
+                    setLoginResult(true);
+                } else {
+                    console.log(res);
+                    setPassword("");
+                }
             })
             .catch((err) => console.log(err));
     };
 
-    return (
+    return loginResult ? (
+        <Redirect to="/dashboard" />
+    ) : (
         <div className="container justify-content-center align-items-center text-center">
             <h1>Login</h1>
             <form className="row" onSubmit={handleSubmit}>
