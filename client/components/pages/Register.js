@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 // TODO: Make the cookies stay
 
@@ -11,6 +12,9 @@ const Register = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+
+    // After form is submitted
+    const [isSucess, setIsSuccess] = useState(false);
 
     // For error messages
     const [flashMessage, setFlashMessage] = useState("");
@@ -41,11 +45,17 @@ const Register = () => {
                     password: password,
                 },
             })
-                .then((res) => console.log(res))
+                .then((res) => {
+                    if (res.status == 201) {
+                        setIsSuccess(true);
+                    }
+                })
                 .catch((err) => console.log(err));
         }
     };
-    return (
+    return isSucess ? (
+        <Redirect to="/login" />
+    ) : (
         <div>
             <h1>Register</h1>
             <form onSubmit={handleSubmit}>
