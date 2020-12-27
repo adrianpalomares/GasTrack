@@ -1,9 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { AuthContext } from "../../App";
 
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+
+    const { accessToken, setAccessToken } = useContext(AuthContext);
+    useEffect(() => {
+        console.log(accessToken);
+        setAccessToken("From login");
+    });
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -27,28 +34,33 @@ const Login = () => {
     };
 
     return (
-        <div>
+        <div className="container justify-content-center align-items-center text-center">
             <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Username</label>
+            <form className="row" onSubmit={handleSubmit}>
+                <label htmlFor="usernameInput" className="">
+                    Username
+                </label>
                 <input
-                    id="username"
+                    id="usernameInput"
+                    className="form-control"
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                 />
-                <br></br>
 
                 {/* Password */}
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password" className="">
+                    Password
+                </label>
                 <input
                     id="password"
+                    className="form-control"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <br></br>
-                <input type="submit" />
+
+                <input type="submit" className="btn btn-info btn-md mt-4" />
             </form>
         </div>
     );
