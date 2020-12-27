@@ -8,13 +8,14 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
 
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import useLocalStorage from "./helper/useLocalStorage";
 
 // TODO: Implemnt context to store accessToken
 export const AuthContext = createContext();
 
 const App = () => {
     // State
-    const [accessToken, setAccessToken] = useState();
+    const [accessToken, setAccessToken] = useLocalStorage("accessToken", "");
 
     return (
         <Router>
