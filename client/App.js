@@ -4,6 +4,7 @@ import Register from "./components/pages/Register";
 import Dashboard from "./components/pages/Dashboard";
 import NotFoundPage from "./components/pages/NotFoundPage";
 import Index from "./components/pages/Index";
+import Cars from "./components/pages/Cars";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
 
@@ -59,6 +60,12 @@ const App = () => {
                         ) : (
                             <React.Fragment>
                                 <li className="nav-item">
+                                    <Link to="/cars" className="nav-link">
+                                        My Cars
+                                    </Link>
+                                </li>
+
+                                <li className="nav-item">
                                     <Link to="/logout" className="nav-link">
                                         Logout
                                     </Link>
@@ -76,6 +83,7 @@ const App = () => {
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/logout" component={Logout} />
+                    <Route exact path="/cars" component={Cars} />
                     <Route exact path="/" component={Index} />
                     <Route component={NotFoundPage} />
                 </Switch>
