@@ -8,16 +8,19 @@ const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
+    const [loggedIn, setLoggedIn] = useState(false);
+
     const [loginResult, setLoginResult] = useState(false);
 
     const { accessToken, setAccessToken, user, setUser } = useContext(
         AuthContext
     );
 
-    // useEffect(() => {
-    //     console.log(accessToken);
-    //     setAccessToken("From login");
-    // }, []);
+    useEffect(() => {
+        if (user) {
+            setLoggedIn(true);
+        }
+    }, []);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -38,7 +41,7 @@ const Login = () => {
                     // Set access token to local storage
                     setAccessToken(res.data.accessToken);
                     setLoginResult(true);
-                    const decodedToken = jwt.decode(JSON.parse(accessToken));
+                    const decodedToken = jwt.decode(res.data.accessToken);
                     setUser(decodedToken);
                     console.log("from user", user);
                 } else {
@@ -49,7 +52,7 @@ const Login = () => {
             .catch((err) => console.log(err));
     };
 
-    return loginResult ? (
+    return loginResult || loggedIn ? (
         <Redirect to="/dashboard" />
     ) : (
         <div className="container justify-content-center align-items-center text-center">
