@@ -4,6 +4,7 @@ import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import Dashboard from "./components/pages/Dashboard";
 import NotFoundPage from "./components/pages/NotFoundPage";
+import Index from "./components/pages/Index";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
 
@@ -62,6 +63,7 @@ const App = () => {
                     <Route exact path="/dashboard" component={Dashboard} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/register" component={Register} />
+                    <Route path="/" component={Index} />
                     <Route component={NotFoundPage} />
                 </Switch>
             </AuthContext.Provider>
