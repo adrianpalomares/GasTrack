@@ -1,5 +1,4 @@
-import { useRoutes } from "hookrouter";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import Dashboard from "./components/pages/Dashboard";
@@ -10,14 +9,15 @@ import "bootstrap/dist/js/bootstrap.js";
 
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import useLocalStorage from "./helper/useLocalStorage";
+import Logout from "./components/pages/Logout";
 
-// TODO: Implemnt context to store accessToken
+// Where user and accessToken will be passed
 export const AuthContext = createContext();
 
 const App = () => {
     // State
-    const [accessToken, setAccessToken] = useLocalStorage("accessToken", "");
-    const [user, setUser] = useLocalStorage("user", "");
+    const [accessToken, setAccessToken] = useLocalStorage("accessToken");
+    const [user, setUser] = useLocalStorage("user");
 
     return (
         <Router>
@@ -43,16 +43,28 @@ const App = () => {
                                 Home<span className="sr-only">(current)</span>
                             </Link>
                         </li>
-                        <li className="nav-item">
-                            <Link to="/register" className="nav-link">
-                                Register
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/login" className="nav-link">
-                                Login
-                            </Link>
-                        </li>
+                        {!user ? (
+                            <React.Fragment>
+                                <li className="nav-item">
+                                    <Link to="/register" className="nav-link">
+                                        Register
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to="/login" className="nav-link">
+                                        Login
+                                    </Link>
+                                </li>
+                            </React.Fragment>
+                        ) : (
+                            <React.Fragment>
+                                <li className="nav-item">
+                                    <Link to="/logout" className="nav-link">
+                                        Logout
+                                    </Link>
+                                </li>
+                            </React.Fragment>
+                        )}
                     </ul>
                 </div>
             </nav>
@@ -63,7 +75,8 @@ const App = () => {
                     <Route exact path="/dashboard" component={Dashboard} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/register" component={Register} />
-                    <Route path="/" component={Index} />
+                    <Route exact path="/logout" component={Logout} />
+                    <Route exact path="/" component={Index} />
                     <Route component={NotFoundPage} />
                 </Switch>
             </AuthContext.Provider>
