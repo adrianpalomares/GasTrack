@@ -16,6 +16,7 @@ export const AuthContext = createContext();
 const App = () => {
     // State
     const [accessToken, setAccessToken] = useLocalStorage("accessToken", "");
+    const [user, setUser] = useLocalStorage("user", "");
 
     return (
         <Router>
@@ -54,7 +55,9 @@ const App = () => {
                     </ul>
                 </div>
             </nav>
-            <AuthContext.Provider value={{ accessToken, setAccessToken }}>
+            <AuthContext.Provider
+                value={{ accessToken, setAccessToken, user, setUser }}
+            >
                 <Switch>
                     <Route exact path="/dashboard" component={Dashboard} />
                     <Route exact path="/login" component={Login} />

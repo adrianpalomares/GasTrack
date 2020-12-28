@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../App";
 import { Redirect } from "react-router-dom";
+import jwt from "jsonwebtoken";
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -9,11 +10,14 @@ const Login = () => {
 
     const [loginResult, setLoginResult] = useState(false);
 
-    const { accessToken, setAccessToken } = useContext(AuthContext);
-    useEffect(() => {
-        console.log(accessToken);
-        setAccessToken("From login");
-    }, []);
+    const { accessToken, setAccessToken, user, setUser } = useContext(
+        AuthContext
+    );
+
+    // useEffect(() => {
+    //     console.log(accessToken);
+    //     setAccessToken("From login");
+    // }, []);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -32,8 +36,11 @@ const Login = () => {
             .then((res) => {
                 if (res.status == 200) {
                     // Set access token to local storage
-                    setAccessToken(res.data.accessToken)
+                    setAccessToken(res.data.accessToken);
                     setLoginResult(true);
+                    const decodedToken = jwt.decode(JSON.parse(accessToken));
+                    setUser(decodedToken);
+                    console.log("from user", user);
                 } else {
                     console.log(res);
                     setPassword("");
