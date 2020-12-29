@@ -1,11 +1,15 @@
 import React from "react";
 import axios from "axios";
 import Car from "../Car";
+import { AuthContext } from "../../App";
 
 // TODO: Manage state input values
 const Cars = () => {
     const [cars, setCars] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState("");
+
+    // Grab context need user
+    const { user } = React.useContext(AuthContext); // Remember to parse this
 
     // For modal form
     const [model, setModel] = React.useState("");
@@ -20,13 +24,31 @@ const Cars = () => {
         axios({
             url: "http://localhost:8080/api/cars",
             method: "GET",
-        }).then((res) => console.log(res));
+        }).then((res) => {
+            console.log(res);
+        });
     }, [isLoading]);
 
     const handleAddCar = (event) => {
         // Make api request
         event.preventDefault();
         console.log(model, make, modelYear, carName, licensePlate, vin);
+        const parsedUser = JSON.parse(user);
+        axios({
+            url: "http://localhost:8080/api/cars",
+            method: "POST",
+            data: {
+                user: parsedUser.id,
+                model: model,
+                make: make,
+                modelYear: modelYear,
+                carName: carName,
+                licensePlate: licensePlate,
+                vin: vin,
+            },
+        }).then(res => {
+            console.log(res);
+        });
     };
     return (
         <div className="container">
@@ -169,6 +191,7 @@ const Cars = () => {
                     </div>
                 </div>
             </div>
+            {/* Loop through cars here */}
             <Car />
         </div>
     );
