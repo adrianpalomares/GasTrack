@@ -7,6 +7,14 @@ const Cars = () => {
     const [cars, setCars] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState("");
 
+    // For modal form
+    const [model, setModel] = React.useState("");
+    const [make, setMake] = React.useState("");
+    const [modelYear, setModelYear] = React.useState("");
+    const [carName, setCarName] = React.useState("");
+    const [licensePlate, setLicensePlate] = React.useState("");
+    const [vin, setVin] = React.useState("");
+
     React.useEffect(() => {
         // make request
         axios({
@@ -15,6 +23,11 @@ const Cars = () => {
         }).then((res) => console.log(res));
     }, [isLoading]);
 
+    const handleAddCar = (event) => {
+        // Make api request
+        event.preventDefault();
+        console.log(model, make, modelYear, carName, licensePlate, vin);
+    };
     return (
         <div className="container">
             <h1>This is the cars page!</h1>
@@ -63,6 +76,9 @@ const Cars = () => {
                                         className="form-control"
                                         id="inputCarMake"
                                         placeholder="Enter car make"
+                                        onChange={(e) =>
+                                            setMake(e.target.value)
+                                        }
                                     />
                                 </div>
                                 <div className="form-group">
@@ -74,6 +90,9 @@ const Cars = () => {
                                         className="form-control"
                                         id="inputCarModel"
                                         placeholder="Enter car model"
+                                        onChange={(e) =>
+                                            setModel(e.target.value)
+                                        }
                                     />
                                 </div>
                                 <div className="form-group">
@@ -85,6 +104,9 @@ const Cars = () => {
                                         className="form-control"
                                         id="inputModelYear"
                                         placeholder="Enter model year"
+                                        onChange={(e) =>
+                                            setModelYear(e.target.value)
+                                        }
                                     />
                                 </div>
                                 <div className="form-group">
@@ -97,6 +119,9 @@ const Cars = () => {
                                         className="form-control"
                                         id="inputCarName"
                                         placeholder="Enter car name"
+                                        onChange={(e) =>
+                                            setCarName(e.target.value)
+                                        }
                                     />
                                 </div>
                                 <div className="form-group">
@@ -108,6 +133,9 @@ const Cars = () => {
                                         className="form-control"
                                         id="inputLicensePlate"
                                         placeholder="Enter license plate"
+                                        onChange={(e) =>
+                                            setLicensePlate(e.target.value)
+                                        }
                                     />
                                 </div>
                                 <div className="form-group">
@@ -117,6 +145,7 @@ const Cars = () => {
                                         className="form-control"
                                         id="inputVin"
                                         placeholder="Enter vin number"
+                                        onChange={(e) => setVin(e.target.value)}
                                     />
                                 </div>
                             </form>
@@ -129,7 +158,11 @@ const Cars = () => {
                             >
                                 Close
                             </button>
-                            <button type="button" className="btn btn-primary">
+                            <button
+                                type="button"
+                                onClick={handleAddCar}
+                                className="btn btn-primary"
+                            >
                                 Save changes
                             </button>
                         </div>
