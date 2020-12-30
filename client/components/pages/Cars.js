@@ -6,7 +6,7 @@ import { AuthContext } from "../../App";
 // TODO: Manage state input values
 const Cars = () => {
     const [cars, setCars] = React.useState([]);
-    const [isLoading, setIsLoading] = React.useState("");
+    const [isLoading, setIsLoading] = React.useState(true);
 
     // Grab context need user
     const { user } = React.useContext(AuthContext); // Remember to parse this
@@ -25,7 +25,11 @@ const Cars = () => {
             url: "http://localhost:8080/api/cars",
             method: "GET",
         }).then((res) => {
-            console.log(res);
+            console.log(res.data);
+            // Adding the car entries to state
+            setCars(res.data);
+            console.log("cars:,", cars);
+            setIsLoading(false);
         });
     }, [isLoading]);
 
@@ -46,7 +50,7 @@ const Cars = () => {
                 licensePlate: licensePlate,
                 vin: vin,
             },
-        }).then(res => {
+        }).then((res) => {
             console.log(res);
         });
     };
@@ -192,7 +196,18 @@ const Cars = () => {
                 </div>
             </div>
             {/* Loop through cars here */}
-            <Car />
+            {cars.map((car) => (
+                <Car
+                    key={car._id}
+                    carName={car.carName}
+                    licensePlate={car.licensePlate}
+                    make={car.make}
+                    model={car.model}
+                    modelYear={car.modelYear}
+                    user={car.user}
+                    vin={car.vin}
+                />
+            ))}
         </div>
     );
 };
