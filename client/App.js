@@ -23,9 +23,9 @@ const App = () => {
     return (
         <Router>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-                <a className="navbar-brand" href="#">
+                <Link to="/" className="navbar-brand">
                     GasTrack
-                </a>
+                </Link>
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -41,7 +41,7 @@ const App = () => {
                     <ul className="navbar-nav">
                         <li className="nav-item active">
                             <Link to="/dashboard" className="nav-link">
-                                Home<span className="sr-only">(current)</span>
+                                Dashboard<span className="sr-only">(current)</span>
                             </Link>
                         </li>
                         {!user ? (
