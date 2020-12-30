@@ -3,7 +3,6 @@ import axios from "axios";
 import Car from "../Car";
 import { AuthContext } from "../../App";
 
-// TODO: Manage state input values
 const Cars = () => {
     const [cars, setCars] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
@@ -19,6 +18,7 @@ const Cars = () => {
     const [licensePlate, setLicensePlate] = React.useState("");
     const [vin, setVin] = React.useState("");
 
+    // TODO: Get cars from specific user only
     React.useEffect(() => {
         // make request
         axios({
