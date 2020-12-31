@@ -12,7 +12,8 @@ const Car = require("../models/carModel");
 // TODO: Add ability to get all of users cars by id
 exports.carList = async function (request, response) {
     try {
-        const results = await Car.find({});
+        // If search query is provided it will use that as the search query
+        const results = await Car.find(request.query);
         response.status(200).json(results);
     } catch (err) {
         console.log(err);
