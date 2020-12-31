@@ -9,7 +9,7 @@ const Car = require("../models/carModel");
     vin: String,
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 */
-
+// TODO: Add ability to get all of users cars by id
 exports.carList = async function (request, response) {
     try {
         const results = await Car.find({});
