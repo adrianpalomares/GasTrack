@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import FuelRecord from "./FuelRecord";
+import AddFuelRecordModal from "../AddFuelRecordModal";
 
 const Dashboard = () => {
     // Fuel records and maintenance records
@@ -21,6 +22,14 @@ const Dashboard = () => {
 
     return (
         <div className="container">
+            <button
+                className="btn btn-primary mb-4 mt-4"
+                data-toggle="modal"
+                data-target="#addFuelRecordModal"
+            >
+                Add Fuel Record
+            </button>
+            <AddFuelRecordModal />
             {fuelRecords.map((fuelRecord) => (
                 <FuelRecord
                     key={fuelRecord._id}
