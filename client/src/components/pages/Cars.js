@@ -22,16 +22,15 @@ const Cars = () => {
     React.useEffect(() => {
         // make request
         axios({
-            url: "http://localhost:8080/api/cars",
+            url: "/api/cars",
             method: "GET",
         }).then((res) => {
             console.log(res.data);
             // Adding the car entries to state
             setCars(res.data);
-            console.log("cars:,", cars);
             setIsLoading(false);
         });
-    }, [isLoading, cars]);
+    }, [isLoading]);
 
     const handleAddCar = (event) => {
         // Make api request
