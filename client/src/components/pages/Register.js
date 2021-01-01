@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 
@@ -26,7 +26,7 @@ const Register = () => {
             setFlashMessage("");
             setFlashMessage("Passwords do not match!");
             setConfirmPassword("");
-        } else if (email != confirmEmail) {
+        } else if (email !== confirmEmail) {
             setFlashMessage("");
             setFlashMessage("Emails do not match!");
         } else {
@@ -46,7 +46,7 @@ const Register = () => {
                 },
             })
                 .then((res) => {
-                    if (res.status == 201) {
+                    if (res.status === 201) {
                         setIsSuccess(true);
                     }
                 })

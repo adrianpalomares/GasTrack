@@ -31,7 +31,7 @@ const Cars = () => {
             console.log("cars:,", cars);
             setIsLoading(false);
         });
-    }, [isLoading]);
+    }, [isLoading, cars]);
 
     const handleAddCar = (event) => {
         // Make api request

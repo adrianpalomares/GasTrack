@@ -12,7 +12,7 @@ const Login = () => {
 
     const [loginResult, setLoginResult] = useState(false);
 
-    const { accessToken, setAccessToken, user, setUser } = useContext(
+    const { setAccessToken, user, setUser } = useContext(
         AuthContext
     );
 
@@ -20,7 +20,7 @@ const Login = () => {
         if (user) {
             setLoggedIn(true);
         }
-    }, []);
+    }, [user]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -37,7 +37,7 @@ const Login = () => {
             },
         })
             .then((res) => {
-                if (res.status == 200) {
+                if (res.status === 200) {
                     // Set access token to local storage
                     setAccessToken(res.data.accessToken);
                     setLoginResult(true);

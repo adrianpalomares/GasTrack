@@ -1,16 +1,5 @@
 import React from "react";
-import axios from "axios";
 const FuelRecord = (props) => {
-    const [isLoading, setIsLoading] = React.useState(true);
-    // React.useEffect(() => {
-    //     axios({
-    //         url: "http://localhost:8080/api/fuelrecords",
-    //         method: "GET",
-    //     }).then((res) => {
-    //         console.log(res);
-
-    //     });
-    // }, [isLoading]);
     return (
         <div className="card text-center">
             <div className="card-header">Saturday September 19, 2020</div>
@@ -21,7 +10,7 @@ const FuelRecord = (props) => {
                         additional content.
                     </p> */}
                 <p style={{ color: "green", fontSize: "20px" }}>30.2 mpg</p>
-                <a href="#" className="btn btn-primary">
+                <a href="/cars" className="btn btn-primary">
                     View Details
                 </a>
             </div>

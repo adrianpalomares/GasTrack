@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext } from "react";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import Dashboard from "./components/pages/Dashboard";
@@ -41,7 +41,8 @@ const App = () => {
                     <ul className="navbar-nav">
                         <li className="nav-item active">
                             <Link to="/dashboard" className="nav-link">
-                                Dashboard<span className="sr-only">(current)</span>
+                                Dashboard
+                                <span className="sr-only">(current)</span>
                             </Link>
                         </li>
                         {!user ? (
@@ -91,4 +92,5 @@ const App = () => {
         </Router>
     );
 };
+
 export default App;

@@ -24,7 +24,7 @@ const AddFuelRecordModal = () => {
             console.log("from res", res.data);
             setUserCars(res.data);
         });
-    }, []);
+    });
 
     // Can have a useEffect for when car is set -> retrieves odometer reading
     React.useEffect(() => {

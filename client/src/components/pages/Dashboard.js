@@ -6,7 +6,6 @@ import AddFuelRecordModal from "../AddFuelRecordModal";
 const Dashboard = () => {
     // Fuel records and maintenance records
     const [fuelRecords, setFuelRecords] = React.useState([]);
-    const [maintenanceRecords, setMaintenanceRecords] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
 
     React.useEffect(() => {
@@ -16,7 +15,6 @@ const Dashboard = () => {
         }).then((res) => {
             setFuelRecords(res.data);
             setIsLoading(false);
-            console.log(fuelRecords);
         });
     }, [isLoading]);
 
