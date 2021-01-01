@@ -20,13 +20,13 @@ const Login = () => {
         if (user) {
             setLoggedIn(true);
         }
-    }, [user]);
+    }, [user, loginResult]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
         axios({
             method: "POST",
-            url: "http://localhost:8080/api/auth/token",
+            url: "/api/auth/token",
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type": "application/json",
