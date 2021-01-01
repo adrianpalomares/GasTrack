@@ -13,7 +13,7 @@ const Logout = () => {
         setAccessToken(null);
         setUser(null);
         setLoggedOut(true);
-    }, [setAccessToken, setUser]);
+    }, [setAccessToken, setUser, setLoggedOut]);
 
     if (loggedOut) return <Redirect to="/" />;
     return <h1>Logging out...</h1>;
