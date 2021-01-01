@@ -32,7 +32,16 @@ async function createUser() {
     });
     return user;
 }
-
+async function createUser2() {
+    const user = await User.create({
+        firstname: "Jane",
+        lastname: "Doe",
+        email: "examplejane@example.com",
+        username: "testjane",
+        password: "password",
+    });
+    return user;
+}
 // Function to create a car
 async function createCar(user) {
     const car = await Car.create({
@@ -170,12 +179,40 @@ describe("GET /api/cars", function () {
     });
 
     it("Should return a 404 w/ message if car not found.", function (done) {
-        chai.request(server).get(`/api/cars/000000000000000000000000`).end(function (err, res) {
-            res.should.have.status(404);
-            res.body.should.have.property('message', "Car not found.");
-            done();
-        })
+        chai.request(server)
+            .get(`/api/cars/000000000000000000000000`)
+            .end(function (err, res) {
+                res.should.have.status(404);
+                res.body.should.have.property("message", "Car not found.");
+                done();
+            });
+    });
 
+    it("Should return results based on queries", async function () {
+        return new Promise(async function (resolve, reject) {
+            try {
+                const user = await createUser();
+                const user2 = await createUser2();
+
+                const createCarResponse = await createCarByPost(user);
+                const carId = createCarResponse.body._id;
+
+                const response = await chai
+                    .request(server)
+                    .get(`/api/cars?user=${user.id}`);
+                response.body.should.have.length(1);
+                response.body[0].user.should.equal(user.id);
+
+                const response2 = await chai
+                    .request(server)
+                    .get(`/api/cars?user=${user2.id}`);
+                response2.body.should.have.length(0);
+
+                resolve();
+            } catch (err) {
+                reject(err);
+            }
+        });
     });
 });
 
