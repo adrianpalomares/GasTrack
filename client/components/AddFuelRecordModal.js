@@ -1,25 +1,30 @@
 import React from "react";
+import axios from "axios";
+import { AuthContext } from "../App";
 
 const AddFuelRecordModal = () => {
-    // car={fuelRecord.car}
-    // date={fuelRecord.date}
-    // fullTank={fuelRecord.fullTank}
-    // gallons={fuelRecord.gallons}
-    // odometer={fuelRecord.odometer}
-    // pricePerGallon={fuelRecord.pricePerGallon}
-    // updatedAt={fuelRecord.updatedAt}
-
     const [car, setCar] = React.useState(""); // Will be car id?
     const [dateFilled, setDateFilled] = React.useState(Date.now());
     const [fullTank, setFullTank] = React.useState(false);
     const [gallons, setGallons] = React.useState(0);
     const [odometer, setOdometer] = React.useState(0);
     const [pricePerGallon, setPricePerGallon] = React.useState(0);
+    const [totalCost, setTotalCost] = React.useState(0);
 
+    const { user } = React.useContext(AuthContext);
     const [userCars, setUserCars] = React.useState([]);
 
     // Grab users cars
-    React.useEffect(() => {}, []);
+    React.useEffect(() => {
+        //
+        axios({
+            url: `http://localhost:8080/api/cars?user=${JSON.parse(user).id}`,
+            method: "GET",
+        }).then((res) => {
+            console.log("from res", res.data);
+            setUserCars(res.data);
+        });
+    }, []);
 
     // Can have a useEffect for when car is set -> retrieves odometer reading
     React.useEffect(() => {
@@ -28,8 +33,23 @@ const AddFuelRecordModal = () => {
     }, [car]);
 
     // Submit form
-    const handleSubmit = () => {
-        console.log(car);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios({
+            url: "http://localhost:8080/api/fuelrecords",
+            method: "POST",
+            data: {
+                car: car,
+                totalCost: totalCost,
+                pricePerGallon: pricePerGallon,
+                gallons: gallons,
+                fullTank: fullTank,
+                date: dateFilled,
+                odometer: odometer,
+            },
+        })
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
     };
 
     return (
@@ -60,15 +80,6 @@ const AddFuelRecordModal = () => {
                     {/* Form goes here */}
                     <div className="modal-body">
                         <form>
-                            {/* <div className="form-group">
-                                <label htmlFor="inputCar">Car</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="inputCar"
-                                    placeholder="Choose car"
-                                />
-                            </div> */}
                             <div className="form-group">
                                 <label htmlFor="inputCar">Car</label>
                                 <select
@@ -79,25 +90,95 @@ const AddFuelRecordModal = () => {
                                 >
                                     <option defaultValue>Choose car</option>
                                     {/* List of users cars */}
-                                    <option value="testvalue">Miata</option>
+                                    {userCars.map((car) => (
+                                        <option key={car._id} value={car._id}>
+                                            {car.model} {car.make}({car.carName}
+                                            )
+                                        </option>
+                                    ))}
                                 </select>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="inputFullTank">Full Tank</label>
+                                <label>Full Tank</label>
+                                <div>
+                                    <label htmlFor="fulltanktrue">Yes</label>
+                                    <input
+                                        name="fulltank"
+                                        value="true"
+                                        type="radio"
+                                        id="fulltanktrue"
+                                        className="mr-2"
+                                        onChange={(e) =>
+                                            setFullTank(e.target.value)
+                                        }
+                                    />
+                                    <label
+                                        htmlFor="fulltankfalse"
+                                        className="ml-2"
+                                    >
+                                        No
+                                    </label>
+                                    <input
+                                        name="fulltank"
+                                        value="false"
+                                        type="radio"
+                                        id="fulltankfalse"
+                                        onChange={(e) =>
+                                            setFullTank(e.target.value)
+                                        }
+                                    />
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="inputDate">Date</label>
                                 <input
-                                    type="text"
+                                    type="date"
                                     className="form-control"
-                                    id="inputFullTank"
-                                    placeholder="Enter if full tank"
+                                    id="inputDate"
+                                    placeholder="Enter date"
+                                    onChange={(e) =>
+                                        setDateFilled(e.target.value)
+                                    }
                                 />
                             </div>
+
                             <div className="form-group">
                                 <label htmlFor="inputGallons">Gallons</label>
                                 <input
-                                    type="text"
+                                    type="number"
                                     className="form-control"
                                     id="inputGallons"
                                     placeholder="Enter gallons"
+                                    onChange={(e) => setGallons(e.target.value)}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="inputPricePerGallon">
+                                    Price per gallon
+                                </label>
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    id="inputPricePerGallon"
+                                    placeholder="Enter price per gallon"
+                                    onChange={(e) =>
+                                        setPricePerGallon(e.target.value)
+                                    }
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="inputTotalCost">
+                                    Total Cost
+                                </label>
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    id="inputTotalCost"
+                                    placeholder="Enter total cost"
+                                    onChange={(e) =>
+                                        setTotalCost(e.target.value)
+                                    }
                                 />
                             </div>
                             <div className="form-group">
@@ -107,6 +188,9 @@ const AddFuelRecordModal = () => {
                                     className="form-control"
                                     id="inputOdometer"
                                     placeholder="Enter odometer reading"
+                                    onChange={(e) =>
+                                        setOdometer(e.target.value)
+                                    }
                                 />
                             </div>
                         </form>
