@@ -22,7 +22,7 @@ const Cars = () => {
     React.useEffect(() => {
         // make request
         axios({
-            url: "/api/cars",
+            url: `/api/cars?user=${userId}`,
             method: "GET",
         }).then((res) => {
             console.log(res.data);
