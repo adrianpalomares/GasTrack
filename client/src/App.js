@@ -18,7 +18,10 @@ export const AuthContext = createContext();
 const App = () => {
     // State
     const [accessToken, setAccessToken] = useLocalStorage("accessToken");
-    const [user, setUser] = useLocalStorage("user");
+    const [userId, setUserId] = useLocalStorage("userId");
+    const [username, setUsername] = useLocalStorage("username")
+    const [email, setEmail] = useLocalStorage("email");
+    const [fullName, setFullName] = useLocalStorage("fullName")
 
     return (
         <Router>
@@ -45,7 +48,7 @@ const App = () => {
                                 <span className="sr-only">(current)</span>
                             </Link>
                         </li>
-                        {!user ? (
+                        {!userId ? (
                             <React.Fragment>
                                 <li className="nav-item">
                                     <Link to="/register" className="nav-link">
@@ -76,8 +79,9 @@ const App = () => {
                     </ul>
                 </div>
             </nav>
+            {/* TODO: fill out other values in context */}
             <AuthContext.Provider
-                value={{ accessToken, setAccessToken, user, setUser }}
+                value={{ accessToken, setAccessToken, userId, setUserId }}
             >
                 <Switch>
                     <Route exact path="/dashboard" component={Dashboard} />

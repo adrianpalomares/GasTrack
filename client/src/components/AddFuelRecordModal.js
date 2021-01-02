@@ -11,20 +11,21 @@ const AddFuelRecordModal = () => {
     const [pricePerGallon, setPricePerGallon] = React.useState(0);
     const [totalCost, setTotalCost] = React.useState(0);
 
-    const { user } = React.useContext(AuthContext);
+    const { userId } = React.useContext(AuthContext);
     const [userCars, setUserCars] = React.useState([]);
 
     // Grab users cars
     React.useEffect(() => {
         //
         axios({
-            url: `http://localhost:8080/api/cars?user=${JSON.parse(user).id}`,
+            url: `/api/cars?user=${userId}`,
             method: "GET",
         }).then((res) => {
             console.log("from res", res.data);
+            console.log(`/api/cars?user=${userId}`)
             setUserCars(res.data);
         });
-    });
+    },[]);
 
     // Can have a useEffect for when car is set -> retrieves odometer reading
     React.useEffect(() => {

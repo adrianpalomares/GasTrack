@@ -12,15 +12,15 @@ const Login = () => {
 
     const [loginResult, setLoginResult] = useState(false);
 
-    const { setAccessToken, user, setUser } = useContext(
+    const { setAccessToken, userId, setUserId } = useContext(
         AuthContext
     );
 
     useEffect(() => {
-        if (user) {
+        if (userId) {
             setLoggedIn(true);
         }
-    }, [user, loginResult]);
+    }, [userId]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -42,8 +42,8 @@ const Login = () => {
                     setAccessToken(res.data.accessToken);
                     setLoginResult(true);
                     const decodedToken = jwt.decode(res.data.accessToken);
-                    setUser(decodedToken);
-                    console.log("from user", user);
+                    setUserId(decodedToken.id);
+                    console.log("from user", userId);
                 } else {
                     console.log(res);
                     setPassword("");
@@ -52,7 +52,7 @@ const Login = () => {
             .catch((err) => console.log(err));
     };
 
-    return loginResult || loggedIn ? (
+    return loggedIn && loginResult ? (
         <Redirect to="/dashboard" />
     ) : (
         <div className="container justify-content-center align-items-center text-center">

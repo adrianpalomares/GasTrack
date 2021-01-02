@@ -5,15 +5,15 @@ import { AuthContext } from "../../App";
 // Can probably use context here? yup
 const Logout = () => {
     // Grab context
-    const { setAccessToken, setUser } = React.useContext(AuthContext);
+    const { setAccessToken, setUserId } = React.useContext(AuthContext);
 
     const [loggedOut, setLoggedOut] = React.useState(false);
     React.useEffect(() => {
         // clear user
         setAccessToken(null);
-        setUser(null);
+        setUserId(null);
         setLoggedOut(true);
-    }, [setAccessToken, setUser, setLoggedOut]);
+    }, [setAccessToken, setUserId, setLoggedOut]);
 
     if (loggedOut) return <Redirect to="/" />;
     return <h1>Logging out...</h1>;

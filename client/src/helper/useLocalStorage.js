@@ -3,7 +3,7 @@ const useLocalStorage = (key) => {
     const [state, setState] = useState(localStorage.getItem(key));
 
     const setStorage = (item) => {
-        let stringifiedItem = JSON.stringify(item);
+        let stringifiedItem = (item);
         localStorage.setItem(key, stringifiedItem);
         setState(item);
     };

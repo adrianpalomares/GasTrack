@@ -8,7 +8,7 @@ const Cars = () => {
     const [isLoading, setIsLoading] = React.useState(true);
 
     // Grab context need user
-    const { user } = React.useContext(AuthContext); // Remember to parse this
+    const { userId } = React.useContext(AuthContext); // Remember to parse this
 
     // For modal form
     const [model, setModel] = React.useState("");
@@ -36,12 +36,11 @@ const Cars = () => {
         // Make api request
         event.preventDefault();
         console.log(model, make, modelYear, carName, licensePlate, vin);
-        const parsedUser = JSON.parse(user);
         axios({
             url: "http://localhost:8080/api/cars",
             method: "POST",
             data: {
-                user: parsedUser.id,
+                user: userId,
                 model: model,
                 make: make,
                 modelYear: modelYear,
