@@ -32,7 +32,7 @@ const Register = () => {
         } else {
             axios({
                 method: "POST",
-                url: "http://localhost:8080/api/users",
+                url: "/api/users",
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",

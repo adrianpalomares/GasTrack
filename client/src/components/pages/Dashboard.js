@@ -8,9 +8,10 @@ const Dashboard = () => {
     const [fuelRecords, setFuelRecords] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
 
+    // TODO: Grab fuel records based on user
     React.useEffect(() => {
         axios({
-            url: "http://localhost:8080/api/fuelrecords",
+            url: "/api/fuelrecords",
             method: "GET",
         }).then((res) => {
             setFuelRecords(res.data);

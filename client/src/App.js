@@ -19,9 +19,9 @@ const App = () => {
     // State
     const [accessToken, setAccessToken] = useLocalStorage("accessToken");
     const [userId, setUserId] = useLocalStorage("userId");
-    const [username, setUsername] = useLocalStorage("username")
+    const [username, setUsername] = useLocalStorage("username");
     const [email, setEmail] = useLocalStorage("email");
-    const [fullName, setFullName] = useLocalStorage("fullName")
+    const [fullName, setFullName] = useLocalStorage("fullName");
 
     return (
         <Router>
@@ -81,7 +81,18 @@ const App = () => {
             </nav>
             {/* TODO: fill out other values in context */}
             <AuthContext.Provider
-                value={{ accessToken, setAccessToken, userId, setUserId }}
+                value={{
+                    accessToken,
+                    setAccessToken,
+                    userId,
+                    setUserId,
+                    username,
+                    setUsername,
+                    email,
+                    setEmail,
+                    fullName,
+                    setFullName,
+                }}
             >
                 <Switch>
                     <Route exact path="/dashboard" component={Dashboard} />

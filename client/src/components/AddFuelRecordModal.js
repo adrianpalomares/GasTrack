@@ -34,10 +34,11 @@ const AddFuelRecordModal = () => {
     }, [car]);
 
     // Submit form
+    // TODO: Handle failure when car is not selected
     const handleSubmit = (e) => {
         e.preventDefault();
         axios({
-            url: "http://localhost:8080/api/fuelrecords",
+            url: "/api/fuelrecords",
             method: "POST",
             data: {
                 car: car,

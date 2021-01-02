@@ -37,7 +37,7 @@ const Cars = () => {
         event.preventDefault();
         console.log(model, make, modelYear, carName, licensePlate, vin);
         axios({
-            url: "http://localhost:8080/api/cars",
+            url: "/api/cars",
             method: "POST",
             data: {
                 user: userId,
