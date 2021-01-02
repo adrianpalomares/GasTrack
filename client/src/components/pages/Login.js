@@ -10,11 +10,7 @@ const Login = () => {
 
     const [loggedIn, setLoggedIn] = useState(false);
 
-    const [loginResult, setLoginResult] = useState(false);
-
-    const { setAccessToken, userId, setUserId } = useContext(
-        AuthContext
-    );
+    const { setAccessToken, userId, setUserId } = useContext(AuthContext);
 
     useEffect(() => {
         if (userId) {
@@ -40,7 +36,6 @@ const Login = () => {
                 if (res.status === 200) {
                     // Set access token to local storage
                     setAccessToken(res.data.accessToken);
-                    setLoginResult(true);
                     const decodedToken = jwt.decode(res.data.accessToken);
                     setUserId(decodedToken.id);
                     console.log("from user", userId);
@@ -52,7 +47,7 @@ const Login = () => {
             .catch((err) => console.log(err));
     };
 
-    return loggedIn && loginResult ? (
+    return loggedIn ? (
         <Redirect to="/dashboard" />
     ) : (
         <div className="container justify-content-center align-items-center text-center">
