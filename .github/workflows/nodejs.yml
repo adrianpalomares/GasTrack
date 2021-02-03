@@ -5,6 +5,8 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NODE_ENV: test
     strategy:
       matrix:
         node-version: [12.x]
