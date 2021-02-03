@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NODE_ENV: test
+      JWT_REFRESH_SECRET: secret
+      JWT_ACCESS_SECRET: secret
     strategy:
       matrix:
         node-version: [12.x]
