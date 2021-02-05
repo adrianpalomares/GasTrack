@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cors());
 
 // Including routes
-const userRoutes = require("./routes/api/users");
+const userRoutes = require("./users/userRoutes");
 const carsRoutes = require("./routes/api/cars");
 const authRoutes = require("./routes/api/auth");
 const fuelRecordRoutes = require("./routes/api/fuelRecords");

@@ -2,8 +2,8 @@ const chai = require("chai");
 const chaiHttp = require("chai-http");
 
 const server = require("../../server/server.js");
+const User = require("../../server/users/userModel");
 
-const User = require("../../server/models/userModel");
 const Car = require("../../server/models/carModel");
 
 chai.use(chaiHttp);

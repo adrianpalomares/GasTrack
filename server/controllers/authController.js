@@ -10,7 +10,7 @@
 // eg. A user wants to delete someone, can only delete themselves
 const jwt = require("jsonwebtoken");
 
-const User = require("../../server/models/userModel");
+const User = require("../users/userModel");
 
 // Could be /login route
 

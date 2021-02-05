@@ -5,7 +5,7 @@ const chaiHttp = require("chai-http");
 const server = require("../../server/server");
 
 const Maintenance = require("../../server/models/maintenanceModel");
-const User = require("../../server/models/userModel");
+const User = require("../../server/users/userModel");
 const Car = require("../../server/models/carModel");
 
 // Clears up the database after each test

@@ -3,7 +3,7 @@ const chaiHttp = require("chai-http");
 
 const server = require("../../server/server");
 
-const User = require("../../server/models/userModel");
+const User = require("../../server/users/userModel");
 
 // Function to create a user
 async function createUser() {

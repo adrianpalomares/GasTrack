@@ -2,7 +2,7 @@ const chai = require("chai");
 
 const FuelRecord = require("../../server/models/fuelRecordModel");
 const Car = require("../../server/models/carModel");
-const User = require("../../server/models/userModel");
+const User = require("../../server/users/userModel");
 
 chai.should();
 
