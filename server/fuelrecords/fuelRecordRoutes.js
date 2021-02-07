@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const fuelRecordController = require("../../controllers/fuelRecordController");
+const fuelRecordController = require("./fuelRecordController");
 
 router.get("/", fuelRecordController.fuelRecordList);
 
