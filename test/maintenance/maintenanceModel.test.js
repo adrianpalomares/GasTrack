@@ -1,12 +1,6 @@
-const mongoose = require("mongoose");
-const chai = require("chai");
-const chaiHttp = require("chai-http");
-
-const server = require("../../server/server");
-
-const Maintenance = require("../../server/models/maintenanceModel");
-const User = require("../../server/models/userModel");
-const Car = require("../../server/models/carModel");
+const Maintenance = require("../../server/maintenance/maintenanceModel");
+const User = require("../../server/users/userModel");
+const Car = require("../../server/cars/carModel");
 
 // Clears up the database after each test
 afterEach(function (done) {
@@ -95,9 +89,9 @@ describe("Maintenance model", function () {
                     type: "Oil Change",
                     locationOfMaintenance: "Bob's Auto Shop",
                     notes: "Used Mobil 10w-40",
-                    cost: 41.99
-                })
-                maintenanceRecord.cost.should.equal("41.99")
+                    cost: 41.99,
+                });
+                maintenanceRecord.cost.should.equal("41.99");
 
                 const maintenanceRecord2 = await Maintenance.create({
                     user: user._id,
@@ -107,13 +101,13 @@ describe("Maintenance model", function () {
                     type: "Oil Change",
                     locationOfMaintenance: "Bob's Auto Shop",
                     notes: "Used Mobil 10w-40",
-                    cost: 4100
-                })
-                maintenanceRecord2.cost.should.equal("4100.00")
-                resolve()
+                    cost: 4100,
+                });
+                maintenanceRecord2.cost.should.equal("4100.00");
+                resolve();
             } catch (err) {
                 reject(err);
             }
-        })
+        });
     });
 });

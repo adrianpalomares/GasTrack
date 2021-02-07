@@ -1,5 +1,4 @@
-const FuelRecord = require("../models/fuelRecordModel");
-const { search } = require("../routes/api/fuelRecords");
+const FuelRecord = require("./fuelRecordModel");
 
 // TODO: Test all of these!
 // TODO: Add the ability to limit and offset the results

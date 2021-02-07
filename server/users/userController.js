@@ -1,4 +1,4 @@
-const User = require("../models/userModel");
+const User = require("./userModel");
 
 /* 
 TODO: Make this function return 10 random users

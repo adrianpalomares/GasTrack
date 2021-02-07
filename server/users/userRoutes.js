@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
-const userController = require("../../controllers/usersController");
-
+const userController = require("./userController");
+/**
+ * Enpoints for express server.
+ */
 router.get("/", userController.userList);
 
 router.get("/:id", userController.userDetail);

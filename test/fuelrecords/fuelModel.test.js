@@ -1,8 +1,8 @@
 const chai = require("chai");
 
-const FuelRecord = require("../../server/models/fuelRecordModel");
-const Car = require("../../server/models/carModel");
-const User = require("../../server/models/userModel");
+const FuelRecord = require("../../server/fuelrecords/fuelRecordModel");
+const Car = require("../../server/cars/carModel");
+const User = require("../../server/users/userModel");
 
 chai.should();
 
