@@ -49,6 +49,7 @@ exports.fuelRecordCreate = async function (request, response) {
             fullTank: request.body.fullTank,
             date: request.body.date,
             odometer: request.body.odometer,
+            previousOdometer: request.body.previousOdometer,
         });
         const savedFuelRecord = await fuelRecord.save();
         response.status(201).json(savedFuelRecord);
