@@ -19,12 +19,12 @@ app.use(cors());
 
 // Including routes
 const userRoutes = require("./users/userRoutes");
-const carsRoutes = require("./routes/api/cars");
+const carRoutes = require("./cars/carRoutes");
 const authRoutes = require("./routes/api/auth");
 const fuelRecordRoutes = require("./routes/api/fuelRecords");
 
 app.use("/api/users", userRoutes);
-app.use("/api/cars", carsRoutes);
+app.use("/api/cars", carRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/fuelrecords", fuelRecordRoutes);
 

@@ -1,12 +1,6 @@
-const mongoose = require("mongoose");
-const chai = require("chai");
-const chaiHttp = require("chai-http");
-
-const server = require("../../server/server");
-
 const Maintenance = require("../../server/models/maintenanceModel");
 const User = require("../../server/users/userModel");
-const Car = require("../../server/models/carModel");
+const Car = require("../../server/cars/carModel");
 
 // Clears up the database after each test
 afterEach(function (done) {
