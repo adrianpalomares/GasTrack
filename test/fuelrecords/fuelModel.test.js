@@ -153,4 +153,17 @@ describe("Fuel Record Model", function () {
             );
         });
     });
+
+    it("should have a previous fuel record field.", function (done) {
+        createCar().then((car) => {
+            // Create the fuel record
+            FuelRecord.create({ car: car, previousOdometer: "12345" }).then(
+                (fuelRecord) => {
+                    // then check if previousOdometer exists.
+                    fuelRecord.should.have.property("previousOdometer");
+                    done();
+                }
+            );
+        });
+    });
 });

@@ -9,6 +9,7 @@ const FuelRecordSchema = new mongoose.Schema(
         fullTank: { type: Boolean, default: false },
         date: { type: Date, default: Date.now },
         odometer: Number,
+        previousOdometer: Number, // Previous odomter reading (used for mpg calc)
     },
     { timestamps: true }
 );
@@ -30,26 +31,26 @@ FuelRecordSchema.path("totalCost").set(function (number) {
 });
 
 /**
-* @return {string} Returns number of gallons in decimal form. 3 places
-*/
+ * @return {string} Returns number of gallons in decimal form. 3 places
+ */
 FuelRecordSchema.path("gallons").get(function (number) {
     return (number / 1000).toFixed(3);
 });
 
 /**
-* Storing number as an interger in database.
-* @return {number} Returns number of gallons as an Integer
-*/
+ * Storing number as an interger in database.
+ * @return {number} Returns number of gallons as an Integer
+ */
 FuelRecordSchema.path("gallons").set(function (number) {
     return number * 1000;
 });
 
-FuelRecordSchema.path('pricePerGallon').get(function (number) {
+FuelRecordSchema.path("pricePerGallon").get(function (number) {
     return (number / 100).toFixed(2);
-})
+});
 
-FuelRecordSchema.path('pricePerGallon').set(function (number) {
+FuelRecordSchema.path("pricePerGallon").set(function (number) {
     return number * 100;
-})
+});
 
 module.exports = mongoose.model("FuelRecord", FuelRecordSchema);
