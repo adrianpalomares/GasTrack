@@ -7,6 +7,7 @@ import Index from "./components/pages/Index";
 import Cars from "./components/pages/Cars";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
+import "./App.css"
 
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import useLocalStorage from "./helper/useLocalStorage";

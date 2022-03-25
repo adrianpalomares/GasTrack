@@ -1,7 +1,7 @@
 import React from "react";
 const FuelRecord = (props) => {
     return (
-        <div className="card text-center">
+        <div className="card text-center rounded">
             <div className="card-header">Saturday September 19, 2020</div>
             <div className="card-body">
                 <h5 className="card-title">Gas</h5>
