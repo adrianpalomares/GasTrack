@@ -14,7 +14,7 @@
     "bootstrap": "^4.5.3",
     "hookrouter": "^1.2.3",
     "jquery": "^3.5.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "popper.js": "^1.16.1",
     "react-router-dom": "^5.2.0"
   },
